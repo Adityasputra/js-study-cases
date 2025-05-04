@@ -1,5 +1,9 @@
 let dataType = "Hello, World!";
 
+const typeOfData = typeof dataType;
+console.log("The type of dataType is: " + typeOfData);
+
+// Check the type of dataType and print a message accordingly
 if (typeof dataType === "string") {
   console.log("dataType is a string");
 } else if (typeof dataType === "number") {
