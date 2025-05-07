@@ -1,38 +1,54 @@
-const readline = require("readline").createInterface({
-  input: process.stdin,
-  output: process.stdout,
-});
+let guesses = [3, 7, 5];
+let guessIndex = 0;
 
-let randomNumber = Math.floor(Math.random() * 10) + 1;
+let randomNumber = 5;
 let attempts = 0;
 const maxAttempts = 3;
+let guess;
+let isCorrect = false;
 
-console.log("Guess the number (1 to 10). You have 3 attempts.");
-
-readline.question("Enter your guess: ", function handleAnswer(answer) {
-  const guess = parseInt(answer);
+// while method
+while (attempts < maxAttempts && !isCorrect) {
+  guess = guesses[guessIndex];
+  console.log(`Attempt ${attempts + 1}: You guessed ${guess}`);
   attempts++;
+  guessIndex++;
 
-  if (isNaN(guess) || guess < 1 || guess > 10) {
-    console.log("Invalid input. Please enter a number between 1 and 10.");
-  } else if (guess === randomNumber) {
+  if (guess === randomNumber) {
     console.log(
-      `Congratulations! You guessed the correct number ${randomNumber} in ${attempts} attempt(s).`
+      `Correct! You guessed the number ${randomNumber} in ${attempts} attempt(s).`
     );
-    readline.close();
-    return;
+    isCorrect = true;
   } else if (guess < randomNumber) {
-    console.log("Too low! Try again.");
+    console.log("Too low!");
   } else {
-    console.log("Too high! Try again.");
+    console.log("Too high!");
   }
+}
 
-  if (attempts >= maxAttempts) {
+if (!isCorrect) {
+  console.log(`Sorry! The correct number was ${randomNumber}.`);
+}
+
+// do...while method
+do {
+  guess = guesses[guessIndex];
+  console.log(`Attempt ${attempts + 1}: You guessed ${guess}`);
+  attempts++;
+  guessIndex++;
+
+  if (guess === randomNumber) {
     console.log(
-      `Sorry, you've used all your attempts. The correct number was ${randomNumber}.`
+      `Correct! You guessed the number ${randomNumber} in ${attempts} attempt(s).`
     );
-    readline.close();
+    isCorrect = true;
+  } else if (guess < randomNumber) {
+    console.log("Too low!");
   } else {
-    readline.question("Enter your guess: ", handleAnswer);
+    console.log("Too high!");
   }
-});
+} while (attempts < maxAttempts && !isCorrect);
+
+if (!isCorrect) {
+  console.log(`Sorry! The correct number was ${randomNumber}.`);
+}
