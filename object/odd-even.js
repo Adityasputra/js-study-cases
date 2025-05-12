@@ -1,8 +1,4 @@
-function validateNumberArray(arr) {
-  if (!Array.isArray(arr) || !arr.every((num) => typeof num === "number")) {
-    throw new TypeError("Input must be an array of numbers");
-  }
-}
+import { validateNumberArray } from "./helpers/validateArray.js";
 
 /**
  * Separates an array of numbers into even and odd groups.
