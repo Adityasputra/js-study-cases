@@ -12,3 +12,19 @@ export function validateStringArray(param) {
     throw new TypeError("Input must be an array of strings");
   }
 }
+
+export function validate2DStringArray(arr) {
+  if (!Array.isArray(arr)) {
+    throw new TypeError("Input must be a 2D array");
+  }
+
+  for (const item of arr) {
+    if (
+      !Array.isArray(item) ||
+      item.length !== 2 ||
+      !item.every((el) => typeof el === "string")
+    ) {
+      throw new TypeError("Each item must be an array of exactly two strings");
+    }
+  }
+}
